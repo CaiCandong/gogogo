@@ -3,9 +3,9 @@
  ![](../../pics/ch2-2/pic1.png)
 ### [第2题](code2)
  ![](../../pics/ch2-2/pic2.png)
-### 第3题
+### [第3题](code3)
  ![](../../pics/ch2-2/pic3.png)
-### 第4题
+### [第4题](code4)
  ![](../../pics/ch2-2/pic4.png)
 ### 第5题
  ![](../../pics/ch2-2/pic5.png)
