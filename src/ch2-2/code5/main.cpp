@@ -4,31 +4,34 @@
 //     int length;   // 当前顺序表长度（包含多少元素）
 //     int listsize; // 当前分配的存储容量（可以存储多少元素）
 // } SqList;
-
-//为方便测试 使用leetcode接口函数定义
-int min=2,max=24;
-int removeDuplicates(int* nums, int numsSize){
-    if(numsSize==0){
-        // return -1;
-        return numsSize;
+bool isRange(int num,int min,int max){
+    if(num<min||num>max){
+        return false;
     }
-    //1.找到下界
-    int i,j;
-    for(i=0;i<numsSize&&nums[i]<min;i++);
-    //2.判断 全部都比min小 无需删除
-    if(i==numsSize){
-        // reutrn -1;
-        return numsSize;
+    return true;
+}
+int remove(int* nums, int numsSize,int min,int max){
+    if(min>=max){//错误判断
+        return -1;
     }
-    //3.找上界
-    for(j=i;j<numsSize&&nums[j]<=max;j++);
-    //4.判断 i后续都比max小
-    if(j==numsSize){
-        numsSize=i;//直接删除
-    }
-    while(j<numsSize){
+    int i=0,j=0;
+    while(j<numsSize){      
+        // 与题6不同的是j在本题中可能越界,而在第6题中不会越界
         nums[i++]=nums[j++];
+        for(;j<numsSize&&isRange(nums[j],min,max);j++);//无效的跳过
     }
-    numsSize=i;
-    return numsSize;
+    return i; 
+}
+int main(){
+    int array[]={1,2,3,7,4,231,43,75,86,65,31,54,22,54,7,3,2,20};
+    int len=18;
+    len=remove(array,len,1,7);
+    if(len==-1){
+        printf("min<=max");
+    }else{
+        for(int i=0;i<len;i++){
+            printf("%d ",array[i]);
+        }
+    }
+    return 0;
 }

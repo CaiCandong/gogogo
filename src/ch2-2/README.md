@@ -7,17 +7,17 @@
  ![](../../pics/ch2-2/pic3.png)
 ### [第4题](code4)
  ![](../../pics/ch2-2/pic4.png)
-### 第5题
+### [第5题](code5)
  ![](../../pics/ch2-2/pic5.png)
-### 第6题
+### [第6题](code6)
  ![](../../pics/ch2-2/pic6.png)
-### 第7题
+### [第7题](code7)
  ![](../../pics/ch2-2/pic7.png)
-### 第8题
+### [第8题](code8)
  ![](../../pics/ch2-2/pic8.png)
-### 第9题
+### [第9题](code9)
  ![](../../pics/ch2-2/pic9.png)
-### 第10题
+### [第10题](code10)
  ![](../../pics/ch2-2/pic10.png)
 ### 第11题
  ![](../../pics/ch2-2/pic11.png)
