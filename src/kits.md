@@ -1,3 +1,6 @@
+## **单链表**
+
+``` c
 #include<stdio.h>
 #include<stdlib.h>
 //单链表
@@ -19,12 +22,11 @@ LinkList nums2List(int nums[],int lenght){
     LNode dummy;
     LinkList p=&dummy;
     for(int i=0;i<lenght;i++){
-        p->next=NewNode(nums[i]);
-        p=p->next;
+       p->next=NewNode(nums[i]); 
+       p=p->next;
     }
     return dummy.next;
 }
-
 void travel(LinkList head){
     LinkList p=head;
     while(p!=NULL){
@@ -33,24 +35,11 @@ void travel(LinkList head){
     }
     printf("\n");
 }
-
-LinkList delete_key(LinkList head,int key){
-    if(head==NULL){
-        return NULL;
-    }
-    LinkList p=head->next;
-    if(head->data==key){
-        free(head);
-        return  delete_key(p,key);
-    }else{
-        head->next=delete_key(p,key);
-        return head;
-    }
-}
 int  main(){
     int nums[]={1,2,3,5,7,8};
     int length=6;
-    LinkList ret=nums2List(nums,length);
-    ret=delete_key(ret,8);
-    travel(ret);
+    LinkList ret=nums2List(nums,length); 
+    travel(ret); 
 }
+```
+
