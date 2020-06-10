@@ -15,15 +15,15 @@ LinkList NewNode(int num){
 }
 
 // 输入数组
-// 返回链表(不带头节点)
+//带头节点
 LinkList nums2List(int nums[],int lenght){
-    ListNode dummy;
-    LinkList p=&dummy;
+    LinkList head=(LinkList)malloc(sizeof(ListNode));
+    LinkList p=head;
     for(int i=0;i<lenght;i++){
         p->next=NewNode(nums[i]);
         p=p->next;
     }
-    return dummy.next;
+    return head;
 }
 
 void travel(LinkList head){
@@ -34,70 +34,77 @@ void travel(LinkList head){
     }
     printf("\n");
 }
-//反向输出
-//利用递归压栈
-void reverseTravel(LinkList head){
-    if(head->next==NULL){
-        return;
-    }
-   if(head->next->next!=NULL){
-       reverseTravel(head->next);
-   } 
-   // 输出下一个节点的val
-    printf("%d ",head->next->val);
-}
-//删除最小的数字
-void solution4(LinkList head){
-    // 1.链表没有数据
-   if(head->next==NULL){
-        return ;
-   } 
-    LinkList p=head;
-   //2.寻找最小的数字
-   LinkList pre=head;
-   while(p->next!=NULL){
-       if(p->next->val<pre->next->val){
-           pre=p;
+//链表分割
+LinkList divide(LinkList A){
+   LinkList B=(LinkList)malloc(sizeof(ListNode)); 
+   B->next=NULL;
+   LinkList p=A->next;
+   LinkList pa=A;
+   LinkList tmp;
+   A->next=NULL;
+   bool flag=true;
+   while(p!=NULL){
+       tmp=p->next;
+       if(flag){
+           //尾插法
+           pa->next=p;
+           pa=pa->next;
+       }else{
+           //头插法
+           p->next=B->next;
+           B->next=p;
        }
-       p=p->next;
-   }
-   //3.删除最小的数字
-   LinkList tmp=pre->next;
-   pre->next=pre->next->next;
-   free(tmp);
-}
-void solution5(LinkList head){
-    LinkList p=head->next;
-    head->next=NULL;
-    //头插法
-    LinkList tmp;
-    while(p!=NULL){
-        tmp=p->next;   
-        p->next=head->next; 
-        head->next=p;
+        flag=!flag;
         p=tmp;
-    }
+   }
+   pa->next=NULL;
+   return B;
 }
-void Remove(LinkList head,int key){
-    LinkList p=head;
-    LinkList tmp=NULL;
-    while(p!=NULL&&p->next!=NULL){
-        if(p->next->val==key){
-            tmp=p->next;
-            p->next=p->next->next;
-            free(tmp);
+LinkList merge(LinkList A,LinkList B){
+    LinkList ret=(LinkList)malloc(sizeof(ListNode)); 
+    ret->next=NULL;
+    LinkList pa=A->next;
+    LinkList pb=B->next;
+    free(A);free(B);
+    //升序变降序 头插法
+    LinkList tmp;//辅助移动
+    while(pa!=NULL&&pb!=NULL){
+        if(pa->val<pb->val){
+            tmp=pa->next;
+            pa->next=ret->next;
+            ret->next=pa;
+            pa=tmp;
+        }else{
+            tmp=pb->next;
+            pb->next=ret->next;
+            ret->next=pb;
+            pb=tmp;
         }
-        p=p->next;
     }
+    if(pa==NULL){
+        pa=pb;
+    }
+    while(pa!=NULL){
+        tmp=pa->next;
+        pa->next=ret->next;
+        ret->next=pa;
+        pa=tmp;
+    }
+    // while(pb!=NULL){
+    //     tmp=pb->next;
+    //     pb->next=ret->next;
+    //     ret->next=pb;
+    //     pb=tmp;
+    // } 
+    return ret;
 }
-
 int  main(){
-    int nums[]={1,2,3,5,-1,8};
-    int length=6;
-    LinkList ret=nums2List(nums,length);
-    LinkList head=(LinkList)malloc(sizeof(ListNode));
-    head->next=ret;
-    travel(head->next);
-    solution5(head);
-    travel(head->next);
+    int nums1[]={1,3,5,7,9};
+    int nums2[]={2,4,6,8,10};
+    LinkList ret1=nums2List(nums1,5);
+    LinkList ret2=nums2List(nums2,5);
+    LinkList ret=merge(ret1,ret2);
+    travel(ret->next);
+    // removeRepeat(head);
+    // travel(head->next);
 }
